@@ -13,6 +13,9 @@ ADD manage.py /app/manage.py
 WORKDIR /app
 RUN ls -la
 
+# Installing requirements
+RUN pip install -r requirements.txt
+
 # Exposing application on port 8000:
 EXPOSE 8000
 
