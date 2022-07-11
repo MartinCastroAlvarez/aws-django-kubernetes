@@ -35,7 +35,7 @@ fi
 echo "${PODS}"
 
 # Extracting pods.
-POD=$(echo "${PODS}" | grep "${APPLICATION}" | awk '{print $1}' | head -1)
+POD=$(echo "${PODS}" | grep "${APPLICATION}" | grep -v "Terminating" | awk '{print $1}' | head -1)
 if [ -z "${POD}" ]
 then
     error "Failed to find pod for '${APPLICATION}'"
