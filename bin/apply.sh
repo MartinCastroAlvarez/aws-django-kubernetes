@@ -110,7 +110,7 @@ kubectl patch deployment \
             "template": {
                 "metadata": {
                     "annotations": {
-                        "last_deploy_date": "`date`"
+                        "last_deploy_date": "'"`date`"'"
                     }
                 }
             }
