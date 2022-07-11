@@ -112,7 +112,7 @@ echo "${URL}"
 
 # Checking application health
 info "Getting '${APPLICATION}-elb' health status on port 80"
-curl -k -s -i -X GET "https://${URL}" | head -20
+curl --fail -k -s -i -X GET "https://${URL}" | head -20
 if [ "$?" != "0" ]
 then
     error "Failed to get '${APPLICATION}-elb' health status"
