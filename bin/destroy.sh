@@ -43,7 +43,7 @@ then
 
     # Creating backend node group.
     info "Creating '${NAMESPACE}' AWS EKS namespace"
-    kubectl create namespace "${NAMESPACE}"
+    kubectl delete namespace "${NAMESPACE}"
     if [ "$?" != "0" ]
     then
         error "Failed to create '${NAMESPACE}' AWS EKS namespace"
