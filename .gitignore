@@ -1,0 +1,5 @@
+*.swp
+*.swo
+concntric-be-app-production-config.sh
+concntric-be-app-testing-config.sh
+eksctl

@@ -1,0 +1,23 @@
+apiVersion: 'v1'
+kind: 'Service'
+metadata:
+  name: 'concntric-be-app-elb'
+  labels:
+    app: 'concntric'
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: 'http'
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: 'arn:aws:acm:us-west-2:705137920128:certificate/cb7f25ea-60c6-496b-86e0-0d56a202d5ea'
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: 'https'
+spec:
+  type: 'LoadBalancer'
+  ports:
+    - protocol: 'TCP'
+      port: 80
+      targetPort: 8000
+      name: 'http'
+    - protocol: 'TCP'
+      port: 443
+      targetPort: 8000
+      name: 'https'
+  selector:
+    app: 'concntric-be-app'

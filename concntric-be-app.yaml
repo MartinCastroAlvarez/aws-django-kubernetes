@@ -1,0 +1,130 @@
+apiVersion: 'apps/v1'
+kind: 'Deployment'
+metadata:
+  name: 'concntric-be-app'
+  labels:
+    app: 'concntric'
+spec:
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: 'RollingUpdate'
+  selector:
+    matchLabels:
+      app: 'concntric-be-app'
+  template:
+    metadata:
+      labels:
+        app: 'concntric-be-app'
+    spec:
+      restartPolicy: 'Always'
+      containers:
+        - image: '705137920128.dkr.ecr.us-west-2.amazonaws.com/concntric-be-app:NAMESPACE'
+          imagePullPolicy: 'Always'
+          name: 'concntric-be-app'
+          ports:
+            - containerPort: 8000
+              name: 'gunicorn'
+          env:
+            - name: 'ALLOWED_HOSTS'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'ALLOWED_HOSTS'
+            - name: 'DB_ENGINE'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'DB_ENGINE'
+            - name: 'AWS_ACCESS_KEY_ID'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'AWS_ACCESS_KEY_ID'
+            - name: 'AWS_DEFAULT_REGION'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'AWS_DEFAULT_REGION'
+            - name: 'AWS_SECRET_ACCESS_KEY'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'AWS_SECRET_ACCESS_KEY'
+            - name: 'AWS_STORAGE_BUCKET_NAME'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'AWS_STORAGE_BUCKET_NAME'
+            - name: 'CC_COMPANY_IMAGES_BUCKET'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'CC_COMPANY_IMAGES_BUCKET'
+            - name: 'CC_ITEMS_IMAGES_BUCKET'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'CC_ITEMS_IMAGES_BUCKET'
+            - name: 'CORS_ORIGIN_WHITELIST'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'CORS_ORIGIN_WHITELIST'
+            - name: 'DEBUG'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'DEBUG'
+            - name: 'DB_NAME'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'DB_NAME'
+            - name: 'DB_HOST'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'DB_HOST'
+            - name: 'DB_PORT'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'DB_PORT'
+            - name: 'DB_PASSWORD'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'DB_PASSWORD'
+            - name: 'DB_USER'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'DB_USER'
+            - name: 'SECRET_KEY'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'SECRET_KEY'
+            - name: 'SITE_URL'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'SITE_URL'
+            - name: 'SMTP_EMAIL'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'SMTP_EMAIL'
+            - name: 'STRIPE_PRIVATE_KEY'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'STRIPE_PRIVATE_KEY'
+            - name: 'STRIPE_PUBLIC_KEY'
+              valueFrom:
+                secretKeyRef:
+                  name: 'config'
+                  key: 'STRIPE_PUBLIC_KEY'
