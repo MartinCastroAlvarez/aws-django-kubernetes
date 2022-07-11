@@ -26,6 +26,10 @@ then
     error "Missing region name"
 fi
 
+# Pulling before pushing.
+info "Pulling image, if exists"
+docker pull "${IMAGE}" 2>/dev/null
+
 # Detecting architecture.
 info "Detecting architecture"
 ARCHITECTURE=$(uname -i)
