@@ -55,7 +55,7 @@ fi
 echo "${PODS}"
 
 # Getting the status of each pod, individually.
-for POD in $(echo "${PODS}" | tail -n +2 | awk '{print $1}')
+for POD in $(echo "${PODS}" | tail -n +2 | grep -v "Terminating" | awk '{print $1}')
 do
     # Getting pod health report
     info "Describing '${POD}' pod"
