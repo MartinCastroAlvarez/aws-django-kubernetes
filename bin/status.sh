@@ -65,6 +65,14 @@ do
         error "Failed to describe '${POD}' pod"
     fi
 
+    # Printing environment variables.
+    info "Printing '${POD}' environment"
+    kubectl exec "${POD}" -n "${NAMESPACE}" -- env 
+    if [ "$?" != "0" ]
+    then
+        error "Failed to print '${POD}' environment"
+    fi  
+
     # Fetching logs from pod.
     info "Fetching '${POD}' pod logs"
     kubectl logs \
@@ -75,7 +83,7 @@ do
         --previous \
         --tail 20 \
         --namespace "${NAMESPACE}" \
-        "${POD}"
+        "${POD}" 2>/dev/null
 done 
 
 # Detecting failing Pods
