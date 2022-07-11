@@ -1,13 +1,5 @@
 #!/bin/bash
 
-clear
-
-source "bin/utils.sh"
-
-source "bin/logo.sh"
-
-source "bin/config.sh"
-
 source "bin/build.sh"
 
 # loading configuration.

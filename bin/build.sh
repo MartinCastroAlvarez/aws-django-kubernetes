@@ -1,5 +1,13 @@
 #!/bin/bash
 
+clear
+
+source "bin/utils.sh"
+
+source "bin/logo.sh"
+
+source "bin/config.sh"
+
 # loading configuration.
 if [ -z "${IMAGE}" ]
 then
