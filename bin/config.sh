@@ -21,6 +21,14 @@ VARIABLES=(
     IMAGE
 )
 
+# Inferring account from session
+ACCOUNT=$(
+    aws sts get-caller-identity \
+        --profile "${PROFILE}" \
+        --query "Account" \
+        --output "text"
+)
+
 # Computed variables.
 IMAGE="${ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${APPLICATION}:${NAMESPACE}"
 
