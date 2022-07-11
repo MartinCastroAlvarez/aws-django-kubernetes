@@ -6,4 +6,10 @@ echo "Collecting static content"
 python3 manage.py collectstatic --noinput
 
 echo "Starting gunicorn service"
-gunicorn --bind 0.0.0.0:8000 --workers 3 --timeout 120 --threads 6 djangokubernetesproject.wsgi
+gunicorn \
+    --bind "0.0.0.0:8000" \
+    --workers 3 \
+    --threads 6 \
+    --timeout 120 \
+    --worker-class "gevent" \
+    djangokubernetesproject.wsgi
