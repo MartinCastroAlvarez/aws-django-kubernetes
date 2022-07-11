@@ -37,10 +37,6 @@ if [ -z "${PEM_FILE}" ]
 then
     error "Missing PEM file name"
 fi
-if [ -z "${NAMESPACE}" ]
-then
-    error "Missing namespace name"
-fi
 
 # Listing existing AWS EKS clusters.
 info "Listing AWS EKS clusters"
@@ -106,28 +102,4 @@ then
     fi
 fi
 
-# Connecting to the cluster.
-source "bin/connect.sh"
-
-# Listing existing AWS EKS naemspaces.
-info "Listing AWS EKS namespaces"
-NAMESPACES="$(kubectl get namespace)"
-if [ "$?" != "0" ]
-then
-    error "Failed to list namespaces"
-fi
-echo "${NAMESPACES}"
-
-# Validating if the node group already exists.
-if [ -z "$(echo ${NAMESPACES} | grep "${NAMESPACE}" )" ]
-then
-
-    # Creating backend node group.
-    info "Creating '${NAMESPACE}' AWS EKS namespace"
-    kubectl create namespace "${NAMESPACE}"
-    if [ "$?" != "0" ]
-    then
-        error "Failed to create '${NAMESPACE}' AWS EKS namespace"
-    fi
-
-fi
+success "Cluster '${CLUSTER}' with nodegroup '${NODEGROUP}' created successfully!"

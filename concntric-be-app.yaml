@@ -21,7 +21,7 @@ spec:
     spec:
       restartPolicy: 'Always'
       containers:
-        - image: '705137920128.dkr.ecr.us-west-2.amazonaws.com/concntric-be-app:NAMESPACE'
+        - image: '705137920128.dkr.ecr.us-west-2.amazonaws.com/concntric-be-app:TAG_NAME'
           imagePullPolicy: 'Always'
           name: 'concntric-be-app'
           ports:

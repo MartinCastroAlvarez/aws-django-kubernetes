@@ -79,7 +79,7 @@ cat "${APPLICATION_FILE}"
 # Deploying application to Kubernetes
 info "Deploying '${APPLICATION}' to '${NAMESPACE}'"
 cat "${APPLICATION_FILE}" \
-    | sed "s/NAMESPACE/${NAMESPACE}/" \
+    | sed "s/TAG_NAME/${TAG_NAME}/" \
     | kubectl apply -f - --namespace "${NAMESPACE}"
 if [ "$?" != "0" ]
 then
@@ -157,4 +157,4 @@ then
     error "Failed to deploy '${APPLICATION}-elb'"
 fi
 
-success "Configuration applied successfully"
+success "Configuration applied successfully to '${APPLICATION}' on '${NAMESPACE}'"

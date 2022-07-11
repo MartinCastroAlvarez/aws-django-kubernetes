@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Loading `.env` file, if exists.
-if [ -f ".env" ]
-then
-    source .env
-fi
-
 # Fixed variables.
 VARIABLES=(
     CLUSTER
@@ -19,6 +13,7 @@ VARIABLES=(
     ACCOUNT
     NAMESPACE
     IMAGE
+    TAG_NAME
 )
 
 # Inferring account from session
@@ -29,8 +24,14 @@ ACCOUNT=$(
         --output "text"
 )
 
+# Inferring the tag name
+if [ -z "${TAG_NAME}" ]
+then
+    TAG_NAME="${NAMESPACE}"
+fi
+
 # Computed variables.
-IMAGE="${ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${APPLICATION}:${NAMESPACE}"
+IMAGE="${ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${APPLICATION}:${TAG_NAME}"
 
 # Validating configuration.
 info "Loading configuration"

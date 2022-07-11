@@ -110,31 +110,12 @@ then
 fi
 echo "${URL}"
 
-# Fetching ELB Ports.
-info "Loading '${APPLICATION}-elb' ports"
-PORTS="$(echo "${SERVICES}" | grep "${APPLICATION}" | awk '{print $5}')"
-if [ "$?" != "0" ]
-then
-    error "Failed to get '${APPLICATION}-elb' ports"
-fi
-echo "${PORTS}"
-
-# Checking ports
-if [ -z "$(echo "${PORTS}" | grep "80:")" ]
-then
-    error "Not listening on port 80"
-fi
-if [ -z "$(echo "${PORTS}" | grep "443:")" ]
-then
-    error "Not listening on port 443"
-fi
-
 # Checking application health
 info "Getting '${APPLICATION}-elb' health status on port 80"
-curl -s -i -X GET "http://${URL}" | head -20
+curl -k -s -i -X GET "https://${URL}" | head -20
 if [ "$?" != "0" ]
 then
     error "Failed to get '${APPLICATION}-elb' health status"
 fi
 
-success "Health check passed"
+success "Health check passed for '${APPLICATION}' on '${NAMESPACE}': 'https://${URL}'"
