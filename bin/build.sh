@@ -42,7 +42,6 @@ then
     # Building on `x86_64`.
     docker buildx create --name "arm64builder" --driver "docker-container" --use
     docker buildx build \
-        --progress "plain" \
         --platform "linux/arm64" \
         --load \
         --file "Kubernetes" \
