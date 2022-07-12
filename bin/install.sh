@@ -6,7 +6,7 @@ source "bin/utils.sh"
 
 source "bin/logo.sh"
 
-source "bin/config.sh"
+source "bin/config.sh" $@
 
 # Adding current directory to the PATH variable.
 info "Updating 'PATH' to include the current directory"

@@ -1,19 +1,35 @@
 #!/bin/bash
 
+# Parsing arguments from command line.
+export PROFILE=$(getopt -o "p:" -l "profile:" -- $@ 2>/dev/null | awk '{print $2}' | sed "s/'//g")
+export NAMESPACE=$(getopt -o "n:" -l "namespace:" -- $@ 2>/dev/null | awk '{print $2}' | sed "s/'//g")
+export APPLICATION=$(getopt -o "a:" -l "application:" -- $@ 2>/dev/null | awk '{print $2}' | sed "s/'//g")
+export CLUSTER=$(getopt -o "c:" -l "cluster:" -- $@ 2>/dev/null | awk '{print $2}' | sed "s/'//g")
+export TAG_NAME=$(getopt -o "t:" -l "tag:" -- $@ 2>/dev/null | awk '{print $2}' | sed "s/'//g")
+export NODEGROUP=$(getopt -l "node-group:" -- $@ 2>/dev/null | awk '{print $2}' | sed "s/'//g")
+export PUBLIC_SUBNETS=$(getopt -l "public-subnets:" -- $@ 2>/dev/null | awk '{print $2}' | sed "s/'//g")
+export PRIVATE_SUBNETS=$(getopt -l "private-subnets:" -- $@ 2>/dev/null | awk '{print $2}' | sed "s/'//g")
+export PEM_FILE=$(getopt -l "pem-file:" -- $@ 2>/dev/null | awk '{print $2}' | sed "s/'//g")
+
 # Fixed variables.
 VARIABLES=(
+    # User variables.
     CLUSTER
     PROFILE
-    AWS_DEFAULT_REGION
+    NAMESPACE
+    APPLICATION
+    TAG_NAME
+
+    # Admin variables.
+    NODEGROUP
     PUBLIC_SUBNETS
     PRIVATE_SUBNETS
-    APPLICATION
-    NODEGROUP
     PEM_FILE
-    ACCOUNT
-    NAMESPACE
+
+    # Computed variables.
     IMAGE
-    TAG_NAME
+    ACCOUNT
+    AWS_DEFAULT_REGION
 )
 
 # Inferring account from session

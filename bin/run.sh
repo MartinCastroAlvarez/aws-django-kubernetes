@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "bin/build.sh"
+source "bin/build.sh" $@
 
 # loading configuration.
 if [ -z "${IMAGE}" ]
