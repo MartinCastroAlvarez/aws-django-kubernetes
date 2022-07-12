@@ -1,6 +1,11 @@
 #!/bin/bash
 echo "Running migrations"
 python3 manage.py migrate --noinput
+if [ "$?" != "0" ]
+then
+    echo "Failed to run migrations"
+    exit 1
+fi
 
 echo "Collecting static content"
 python3 manage.py collectstatic --noinput
