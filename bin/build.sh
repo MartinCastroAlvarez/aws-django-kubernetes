@@ -43,6 +43,7 @@ then
     docker buildx create --name "arm64builder" --driver "docker-container" --use
     docker buildx build \
         --platform "linux/arm64" \
+        --pull \
         --load \
         --file "Kubernetes" \
         -t "${IMAGE}" \
@@ -55,7 +56,7 @@ then
 else
     # Building on `arm64`.
     info "Building '${IMAGE}' 'linux/arm64' Docker image"
-    docker build -t "${IMAGE}" --file "Kubernetes" .
+    docker build --pull -t "${IMAGE}" --file "Kubernetes" .
     if [ "$?" != "0" ]
     then
         error "Failed to build '${IMAGE}' Docker image"
