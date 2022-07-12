@@ -1,5 +1,6 @@
 #!/bin/bash
 
+tput blink
 tput setaf 3
 echo ''
 printf -vl "%${COLUMNS:-`tput cols 2>&-||echo 80`}s\n" && echo ${l// /-};
