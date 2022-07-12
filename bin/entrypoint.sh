@@ -18,3 +18,8 @@ gunicorn \
     --timeout 120 \
     --worker-class "gevent" \
     djangokubernetesproject.wsgi
+if [ "$?" != "0" ]
+then
+    echo "Failed to start gunicorn service"
+    exit 1
+fi
