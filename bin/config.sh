@@ -30,6 +30,13 @@ then
     TAG_NAME="${NAMESPACE}"
 fi
 
+# Inferring the region name.
+if [ -z "${AWS_DEFAULT_REGION}" ]
+then
+    AWS_DEFAULT_REGION=$(aws configure get region --profile "${PROFILE}")
+fi
+echo $AWS_DEFAULT_REGION
+
 # Computed variables.
 IMAGE="${ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${APPLICATION}:${TAG_NAME}"
 
