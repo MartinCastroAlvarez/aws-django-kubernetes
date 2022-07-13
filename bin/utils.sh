@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# This function is used to print INFO messages to STDOUT.
 function info {
     tput setaf 3
     echo ""
@@ -9,6 +9,7 @@ function info {
     tput sgr0
 }
 
+# This function is used to print SUCCESS messages to STDOUT.
 function success {
     tput setaf 11
     echo ""
@@ -18,6 +19,7 @@ function success {
     exit 0
 }
 
+# This function is used to print ERROR messages to STDOUT.
 function error {
     tput setaf 1
     echo ""
